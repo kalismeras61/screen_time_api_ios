@@ -17,13 +17,13 @@ class FamilyControlModel: ObservableObject {
 
     var selectionToDiscourage = FamilyActivitySelection() {
         willSet {
-            print ("got here \(newValue)")
+            print("got here \(newValue)")
 
             let applications = newValue.applicationTokens
             let categories = newValue.categoryTokens
 
-            print ("applications \(applications)")
-            print ("categories \(categories)")
+            print("applications \(applications)")
+            print("categories \(categories)")
 
             store.shield.applications = applications.isEmpty ? nil : applications
 
@@ -82,23 +82,34 @@ class FamilyControlModel: ObservableObject {
 
     // New function to disallow specific apps
     func disallowApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
-        store.shield.applications = Set(applicationTokens)
+        var applicationTokens = Set<ApplicationToken>()
+        for bundleIdentifier in bundleIdentifiers {
+            if let token = ApplicationToken(from: bundleIdentifier) {
+                applicationTokens.insert(token)
+            }
+        }
+        store.shield.applications = applicationTokens
     }
 
     // Function to add more disallowed apps
     func addDisallowedApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
-        var currentApplications = store.shield.applications ?? Set<ApplicationToken>()
-        currentApplications.formUnion(applicationTokens)
-        store.shield.applications = currentApplications
+        var applicationTokens = store.shield.applications ?? Set<ApplicationToken>()
+        for bundleIdentifier in bundleIdentifiers {
+            if let token = ApplicationToken(from: bundleIdentifier) {
+                applicationTokens.insert(token)
+            }
+        }
+        store.shield.applications = applicationTokens
     }
 
     // Function to remove disallowed apps
     func removeDisallowedApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
-        var currentApplications = store.shield.applications ?? Set<ApplicationToken>()
-        currentApplications.subtract(applicationTokens)
-        store.shield.applications = currentApplications
+        var applicationTokens = store.shield.applications ?? Set<ApplicationToken>()
+        for bundleIdentifier in bundleIdentifiers {
+            if let token = ApplicationToken(from: bundleIdentifier) {
+                applicationTokens.remove(token)
+            }
+        }
+        store.shield.applications = applicationTokens
     }
 }
