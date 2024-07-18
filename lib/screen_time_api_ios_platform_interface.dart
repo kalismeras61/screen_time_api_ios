@@ -24,6 +24,26 @@ abstract class ScreenTimeApiIosPlatform extends PlatformInterface {
   }
 
   Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('getPlatformVersion() has not been implemented.');
+  }
+
+  Future<void> selectAppsToDiscourage() {
+    throw UnimplementedError('selectAppsToDiscourage() has not been implemented.');
+  }
+
+  Future<void> encourageAll() {
+    throw UnimplementedError('encourageAll() has not been implemented.');
+  }
+
+  Future<void> disallowApps(List<String> bundleIdentifiers) {
+    throw UnimplementedError('disallowApps() has not been implemented.');
+  }
+
+  Future<void> addDisallowedApps(List<String> bundleIdentifiers) {
+    throw UnimplementedError('addDisallowedApps() has not been implemented.');
+  }
+
+  Future<void> removeDisallowedApps(List<String> bundleIdentifiers) {
+    throw UnimplementedError('removeDisallowedApps() has not been implemented.');
   }
 }
