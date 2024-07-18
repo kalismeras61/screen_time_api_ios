@@ -82,13 +82,13 @@ class FamilyControlModel: ObservableObject {
 
     // New function to disallow specific apps
     func disallowApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(identifier: $0) }
+        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
         store.shield.applications = Set(applicationTokens)
     }
 
     // Function to add more disallowed apps
     func addDisallowedApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(identifier: $0) }
+        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
         var currentApplications = store.shield.applications ?? Set<ApplicationToken>()
         currentApplications.formUnion(applicationTokens)
         store.shield.applications = currentApplications
@@ -96,7 +96,7 @@ class FamilyControlModel: ObservableObject {
 
     // Function to remove disallowed apps
     func removeDisallowedApps(bundleIdentifiers: [String]) {
-        let applicationTokens = bundleIdentifiers.map { ApplicationToken(identifier: $0) }
+        let applicationTokens = bundleIdentifiers.map { ApplicationToken(from: $0) }
         var currentApplications = store.shield.applications ?? Set<ApplicationToken>()
         currentApplications.subtract(applicationTokens)
         store.shield.applications = currentApplications
