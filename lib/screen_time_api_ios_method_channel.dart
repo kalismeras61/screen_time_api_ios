@@ -15,11 +15,28 @@ class MethodChannelScreenTimeApiIos extends ScreenTimeApiIosPlatform {
     return version;
   }
 
-  Future selectAppsToDiscourage() async {
+  @override
+  Future<void> selectAppsToDiscourage() async {
     await methodChannel.invokeMethod('selectAppsToDiscourage');
   }
 
-  Future encourageAll() async {
+  @override
+  Future<void> encourageAll() async {
     await methodChannel.invokeMethod('encourageAll');
+  }
+
+  @override
+  Future<void> disallowApps(List<String> bundleIdentifiers) async {
+    await methodChannel.invokeMethod('disallowApps', bundleIdentifiers);
+  }
+
+  @override
+  Future<void> addDisallowedApps(List<String> bundleIdentifiers) async {
+    await methodChannel.invokeMethod('addDisallowedApps', bundleIdentifiers);
+  }
+
+  @override
+  Future<void> removeDisallowedApps(List<String> bundleIdentifiers) async {
+    await methodChannel.invokeMethod('removeDisallowedApps', bundleIdentifiers);
   }
 }
