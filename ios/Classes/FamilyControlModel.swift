@@ -66,20 +66,11 @@ class FamilyControlModel: ObservableObject {
         return try? decoder.decode(FamilyActivitySelection.self, from: data)
     }
 
-    // Utility function to create ApplicationToken
-    private func createApplicationToken(bundleIdentifier: String) -> ApplicationToken? {
-        // Attempting to create ApplicationToken with the correct initializer
-        guard let bundleIdentifier = BundleIdentifier(bundleIdentifier) else {
-            return nil
-        }
-        return ApplicationToken(from: bundleIdentifier)
-    }
-
     // New function to disallow specific apps
     func disallowApps(bundleIdentifiers: [String]) {
         var applicationTokens = Set<ApplicationToken>()
         for bundleIdentifier in bundleIdentifiers {
-            if let token = createApplicationToken(bundleIdentifier: bundleIdentifier) {
+            if let token = ApplicationToken(bundleIdentifier: bundleIdentifier) {
                 applicationTokens.insert(token)
             }
         }
@@ -90,7 +81,7 @@ class FamilyControlModel: ObservableObject {
     func addDisallowedApps(bundleIdentifiers: [String]) {
         var applicationTokens = store.shield.applications ?? Set<ApplicationToken>()
         for bundleIdentifier in bundleIdentifiers {
-            if let token = createApplicationToken(bundleIdentifier: bundleIdentifier) {
+            if let token = ApplicationToken(bundleIdentifier: bundleIdentifier) {
                 applicationTokens.insert(token)
             }
         }
@@ -101,7 +92,7 @@ class FamilyControlModel: ObservableObject {
     func removeDisallowedApps(bundleIdentifiers: [String]) {
         var applicationTokens = store.shield.applications ?? Set<ApplicationToken>()
         for bundleIdentifier in bundleIdentifiers {
-            if let token = createApplicationToken(bundleIdentifier: bundleIdentifier) {
+            if let token = ApplicationToken(bundleIdentifier: bundleIdentifier) {
                 applicationTokens.remove(token)
             }
         }
