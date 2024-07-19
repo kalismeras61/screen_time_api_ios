@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FamilyControls
-
+@available(iOS 16.0, *)
 struct ContentView: View {
     @StateObject var model = FamilyControlModel.shared
 
@@ -17,7 +17,7 @@ struct ContentView: View {
         )
     }
 }
-
+@available(iOS 16.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
