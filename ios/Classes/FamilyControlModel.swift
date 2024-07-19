@@ -68,11 +68,7 @@ class FamilyControlModel: ObservableObject {
 
     // Utility function to create ApplicationToken
     private func createApplicationToken(bundleIdentifier: String) -> ApplicationToken? {
-        // Attempting to create ApplicationToken with the correct initializer
-        guard let bundleIdentifier = BundleIdentifier(bundleIdentifier) else {
-            return nil
-        }
-        return ApplicationToken(from: bundleIdentifier)
+        return ApplicationToken(bundleIdentifier: BundleIdentifier(bundleIdentifier))
     }
 
     // New function to disallow specific apps
