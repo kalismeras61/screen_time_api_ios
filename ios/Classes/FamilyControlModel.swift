@@ -34,6 +34,8 @@ class FamilyControlModel: ObservableObject {
             store.shield.webDomainCategories = ShieldSettings
                 .ActivityCategoryPolicy
                 .specific(categories)
+
+          dprint("store.shield.applications \(store.shield.applications) \(newValue)") 
             self.saveSelection(selection: newValue)
         }
     }
