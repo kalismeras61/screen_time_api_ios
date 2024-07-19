@@ -3,7 +3,7 @@ import FamilyControls
 import DeviceActivity
 import ManagedSettings
 
-@available(iOS 13.0, *)
+@available(iOS 16.0, *)
 class FamilyControlModel: ObservableObject {
     static let shared = FamilyControlModel()
 
